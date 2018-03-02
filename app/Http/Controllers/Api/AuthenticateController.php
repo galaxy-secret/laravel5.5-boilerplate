@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Socialite;
 
@@ -16,7 +15,7 @@ use Validator;
 
 class AuthenticateController extends ApiController
 {
-	use AuthenticatesUsers, AuthenticateClient;
+	use AuthenticateClient;
 
     public function __construct()
     {
@@ -113,8 +112,9 @@ class AuthenticateController extends ApiController
     protected function sendLoginResponse(Request $request)
     {
         $this->clearLoginAttempts($request);
-
-        return $this->authenticated($request);
+        $response = $this->authenticated($request);
+        $token = json_decode($response->getContent(), true);
+        return $this->success(['message'=> "登录成功", 'token' => $token]);
     }
 
     protected function sendFailedLoginResponse(Request $request)

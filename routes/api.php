@@ -23,6 +23,8 @@ Route::namespace('Api')->group(function () {
 	Route::post('/regist', "RegisterController@register");
 	Route::middleware('auth:api')->group(function () {
 	    Route::get('/index', "IndexController@index");
+	    Route::get('/user/info', "UserController@info");
+	    Route::resource('users', 'UserController');
 	});
 
 });

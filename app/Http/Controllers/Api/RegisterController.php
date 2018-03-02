@@ -17,7 +17,7 @@ class RegisterController extends ApiController
 {
 
 
-    use RegistersUsers, AuthenticateClient;
+    use AuthenticateClient;
 
     public function __construct()
     {

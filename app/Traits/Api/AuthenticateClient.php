@@ -9,11 +9,13 @@
 
 namespace App\Traits\Api;
 
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Laravel\Passport\Client;
 
 trait AuthenticateClient {
 
+    use AuthenticatesUsers;
 
     public function username()
     {
