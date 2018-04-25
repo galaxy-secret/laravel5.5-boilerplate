@@ -17,15 +17,42 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::namespace('Api')->group(function () {
-
-	Route::post('/login', "AuthenticateController@login");
-	Route::post('/regist', "RegisterController@register");
-	Route::middleware('auth:api')->group(function () {
-	    Route::get('/index', "IndexController@index");
-	    Route::get('/user/info', "UserController@info");
-	    Route::resource('users', 'UserController');
-	});
-
+/**
+ * 用户端 注册登录地址
+ */
+Route::namespace('Auth')->prefix('/v1')->group(function () {
+    Route::namespace('Frontend')->group(function () {
+        Route::post('auth/register', 'RegisterController@register');
+        Route::post('auth/login', 'LoginController@login');
+        Route::post('auth/refresh/token', 'LoginController@refreshToken');
+    });
 });
+/**
+ * 后台管理人员的登录
+ */
+Route::namespace('Auth')->prefix('/v1')->group(function () {
+    Route::namespace('Manager')->group(function () {
+        Route::post('gm/login', 'LoginController@login');
+        Route::post('gm/refresh/token', 'LoginController@refreshToken');
+    });
+});
+
+/**
+ * 获取用户信息
+ */
+Route::namespace('Frontend')->prefix('/v1')->group(function () {
+	Route::get('member', 'MemberController@show');
+	Route::put('members/{id}', 'MemberController@update');
+});
+
+
+
+
+
+
+
+
+
+
+
 

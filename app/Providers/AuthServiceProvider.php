@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Laravel\Passport\Passport;
-
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,7 +26,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+//        Route::group(['middleware' => 'passport-multi-provider'], function () {
+//            Passport::routes();
+//            Passport::tokensExpireIn(now()->addDays(15));
+//            Passport::refreshTokensExpireIn(now()->addDays(30));
+//        });
         Passport::routes();
+        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
     }
 }

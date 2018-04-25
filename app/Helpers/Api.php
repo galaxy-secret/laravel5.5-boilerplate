@@ -1,4 +1,9 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: pandaria
+ * Date: 2018/4/19 16:15
+ */
 
 
 namespace App\Helpers\Api;
@@ -12,7 +17,9 @@ use App\Traits\Api\ApiResponse;
 
 class ExceptionReport {
 
-	use ApiResponse;
+    use ApiResponse;
+
+    const VALIDATION_EXCEPTION_CODE = 60000;
 
     /**
      * @var Exception
@@ -45,7 +52,7 @@ class ExceptionReport {
     public $doReport = [
         AuthenticationException::class => ['未授权',401],
         ModelNotFoundException::class => ['改模型未找到',404],
-        ValidationException::class => []
+        ValidationException::class => ['invalid params', self::VALIDATION_EXCEPTION_CODE]
     ];
 
     /**
@@ -75,7 +82,6 @@ class ExceptionReport {
      * @return static
      */
     public static function make(Exception $e){
-
         return new static(\request(),$e);
     }
 
@@ -85,7 +91,7 @@ class ExceptionReport {
     public function report(){
 
         if ($this->exception instanceof ValidationException){
-            return $this->failed($this->exception->errors());
+            return $this->failed(json_encode($this->exception->errors()), self::VALIDATION_EXCEPTION_CODE);
         }
 
         $message = $this->doReport[$this->report];

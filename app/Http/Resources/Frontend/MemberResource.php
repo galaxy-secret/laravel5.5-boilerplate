@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Frontend;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class UserResource extends Resource
+class MemberResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -19,6 +19,7 @@ class UserResource extends Resource
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
+            'head_pic' => $this->head_pic,
         ];
     }
 }

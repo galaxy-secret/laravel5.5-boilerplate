@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: duanbin
+ * User: pandaria
  * Date: 2018/4/17 13:09
  */
 
@@ -26,7 +26,7 @@ class GnuPG
      * 使用私钥进行签名
      * @param string $plaintext
      * @return array|string
-     * @author duanbin
+     * @author pandaria
      * @date 2018/4/17 18:48
      */
     public function sign(string $plaintext)
@@ -44,7 +44,7 @@ class GnuPG
      * @param $signed_text
      * @param $signature
      * @return array|bool
-     * @author duanbin
+     * @author pandaria
      * @date 2018/4/17 18:48
      */
     public function verify(string $signed_text, string $signature)
@@ -61,7 +61,7 @@ class GnuPG
      * 签名且加密
      * @param string $plaintext
      * @return array|string
-     * @author duanbin
+     * @author pandaria
      * @date 2018/4/19 15:51
      */
     public function encryptSign(string $plaintext)
@@ -80,7 +80,7 @@ class GnuPG
      * 解密并验证签名
      * @param string $encrypted_signed_text
      * @return array|bool
-     * @author duanbin
+     * @author pandaria
      * @date 2018/4/19 16:08
      */
     public function decryptVerify(string $encrypted_signed_text)
@@ -100,7 +100,7 @@ class GnuPG
      * 加密
      * @param string $plaintext
      * @return array|string
-     * @author duanbin
+     * @author pandaria
      * @date 2018/4/19 16:09
      */
     public function encrypt(string $plaintext)
@@ -117,7 +117,7 @@ class GnuPG
      * 解密
      * @param $encrypted_signed_text
      * @return array|string
-     * @author duanbin
+     * @author pandaria
      * @date 2018/4/19 16:09
      */
     public function decrypt($encrypted_signed_text)
