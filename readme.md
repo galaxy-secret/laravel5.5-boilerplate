@@ -14,6 +14,8 @@
 
 ## gnupg
 
+need [php gnupg](http://pecl.php.net/package/gnupg)
+
 ```bash
 
 gpg --homedir /path/to/your/project --import private-key.txt
