@@ -15,8 +15,6 @@ class RegionsTableSeeder extends Seeder
         $this->fillRegionsTable($table_name);
     }
 
-
-
     protected function fillRegionsTable($table_name) {
         $sql_file_path = __DIR__ . DIRECTORY_SEPARATOR .'regions.sql';
         if (file_exists($sql_file_path)){

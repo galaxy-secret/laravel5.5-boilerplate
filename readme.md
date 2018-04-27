@@ -1,30 +1,72 @@
-## laravel5.5-boilerplate
+#inesa take out
 
-```bash
-  composer install 
+#### deploy
 
-  composer dumpautoload
+``` bash
+ composer install 
 
-  php artisan migrate
+ composer dumpautoload
 
-  php artisan db:seed --class=RegionsTableSeeder
+ php artisan migrate
 
-  php artisan passport:install
+ php artisan db:seed --class=RegionsTableSeeder
+ 
+ php artisan passport:install
+ 
 ```
 
-## gnupg
+#### gnupg
 
-need [php gnupg](http://pecl.php.net/package/gnupg)
-
-```bash
-
+``` bash
 gpg --homedir /path/to/your/project --import private-key.txt
+```
 
-# update config/gnupg.php
+change config/gnupg.php 
+
+``` php
     'gpg' => [
         'gnupg_home' => 'GNUPGHOME=/path/to/your/project/.gnupg',
         'private_key_fingerprint' => 'fingerprint',
         'public_key_fingerprint' => 'fingerprint',
     ],
+```
 
+#### redis
+
+* change config/database.php or .env
+
+```php
+    'redis' => [
+
+        'client' => 'predis',
+
+        'default' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => 0,
+        ],
+
+    ],
+```
+
+* change config/queue.php
+
+```php
+        'sync' => [
+            'driver' => 'redis',
+        ],
+        ...
+        'redis' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => '{default}',
+            'retry_after' => 90,
+        ],
+```
+
+* start queue work
+
+```bash
+php artisan queue:work redis 
 ```

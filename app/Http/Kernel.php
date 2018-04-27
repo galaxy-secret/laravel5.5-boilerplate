@@ -57,6 +57,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'auth-frontend' => \App\Http\Middleware\FrontendAuthenticate::class,
+        'auth-backend' => \App\Http\Middleware\BackendAuthenticate::class,
 //        'passport-multi-provider' => \App\Http\Middleware\PassportCustom::class,
     ];
 }

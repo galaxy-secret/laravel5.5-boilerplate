@@ -13,15 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+
+
+Route::get('/test/index', 'TestController@index');
 
 /**
  * 用户端 注册登录地址
  */
 Route::namespace('Auth')->prefix('/v1')->group(function () {
-    Route::namespace('Frontend')->group(function () {
+    Route::namespace('TakeOut')->group(function () {
         Route::post('auth/register', 'RegisterController@register');
         Route::post('auth/login', 'LoginController@login');
         Route::post('auth/refresh/token', 'LoginController@refreshToken');
@@ -37,22 +37,14 @@ Route::namespace('Auth')->prefix('/v1')->group(function () {
     });
 });
 
-/**
- * 获取用户信息
- */
-Route::namespace('Frontend')->prefix('/v1')->group(function () {
-	Route::get('member', 'MemberController@show');
-	Route::put('members/{id}', 'MemberController@update');
+Route::namespace('V1')->prefix('/v1')->middleware([ 'auth-frontend' ])->group(function() {
+
+
+    Route::namespace('Frontend')->group(function () {
+        Route::get('member', 'MemberController@show');
+        Route::put('members/{id}', 'MemberController@update');
+    });
+
+
+
 });
-
-
-
-
-
-
-
-
-
-
-
-

@@ -9,17 +9,20 @@
 namespace App\Helpers\Api;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Traits\Api\ApiResponse;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class ExceptionReport {
 
     use ApiResponse;
 
     const VALIDATION_EXCEPTION_CODE = 60000;
+    const HTTP_UNAUTHORIZED= 401;
 
     /**
      * @var Exception
@@ -50,9 +53,10 @@ class ExceptionReport {
      * @var array
      */
     public $doReport = [
-        AuthenticationException::class => ['未授权',401],
+        AuthenticationException::class => ['未授权',self::HTTP_UNAUTHORIZED],
         ModelNotFoundException::class => ['改模型未找到',404],
-        ValidationException::class => ['invalid params', self::VALIDATION_EXCEPTION_CODE]
+        ValidationException::class => ['invalid params', self::VALIDATION_EXCEPTION_CODE],
+        AuthorizationException::class => ['This action is unauthorized.', self::HTTP_UNAUTHORIZED]
     ];
 
     /**

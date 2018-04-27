@@ -6,6 +6,45 @@
  */
 
 
+if (!function_exists('cent_2_yuan')) {
+    /**
+     * 分转元
+     * @param $cent
+     * @return float
+     * @author pandaria
+     * @date 2018/4/27 16:27
+     */
+    function cent_2_yuan($cent) {
+        return round($cent / 100, 2, PHP_ROUND_HALF_UP);
+    }
+}
+
+
+if (!function_exists('yuan_2_cent')) {
+    /**
+     * 元转分
+     * @param $yuan
+     * @return float
+     * @author pandaria
+     * @date 2018/4/27 16:27
+     */
+    function yuan_2_cent($yuan) {
+        return (int)round($yuan * 100, 0, PHP_ROUND_HALF_UP);
+    }
+}
+
+if (!function_exists('generate_order_id')) {
+    /**
+     * 生成订单id
+     * @return string
+     * @author pandaria
+     * @date 2018/4/27 16:10
+     */
+    function generate_order_id() {
+        return date('YmdHis') . str_replace('-', '', \Ramsey\Uuid\Uuid::uuid4()->toString());
+    }
+}
+
 if (!function_exists('check_user_stateful')) {
     /**
      * @param $provider
